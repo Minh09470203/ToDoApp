@@ -28,3 +28,7 @@ A simple and beautiful ToDoList application built with Flutter. You can add, vie
 
 - [Flutter](https://flutter.dev/)
 - [confirm_dialog](https://pub.dev/packages/confirm_dialog)
+
+## License
+
+This project is licensed under the MIT License.
