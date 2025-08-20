@@ -15,7 +15,7 @@ void main(List<String> args) {
 }
 
 class MyApp extends StatefulWidget {
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -95,8 +95,8 @@ class _MyAppState extends State<MyApp> {
             },
           );
         },
-        child: Icon(Icons.add, size: 30, color: Colors.lightBlueAccent),
         backgroundColor: Colors.white,
+        child: Icon(Icons.add, size: 30, color: Colors.lightBlueAccent),
       ),
     );
   }

@@ -1,30 +1,16 @@
-# ToDoList Flutter App
+# todoapp
 
-A simple and beautiful ToDoList application built with Flutter. You can add, view, and delete tasks with confirmation dialogs.
+A new Flutter project.
 
-## Features
+## Getting Started
 
-- Add new tasks
-- View all tasks in a styled list
-- Delete tasks with confirmation dialog
-- Responsive and modern UI
+This project is a starting point for a Flutter application.
 
-## Installation
+A few resources to get you started if this is your first Flutter project:
 
-1. **Clone the repository:**
-2. **Install dependencies:**
+- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-## Running the App
-**On Android/iOS emulator or device:**
-
-## Usage
-
-1. Tap the **"+"** button to add a new task.
-2. Enter the task name and press **"Add Task"**.
-3. Your tasks will appear in the list.
-4. To delete a task, tap the **delete icon**. A confirmation dialog will appear. Choose **OK** to delete or **Cancel** to keep the task.
-
-## Dependencies
-
-- [Flutter](https://flutter.dev/)
-- [confirm_dialog](https://pub.dev/packages/confirm_dialog)
+For help getting started with Flutter development, view the
+[online documentation](https://docs.flutter.dev/), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
