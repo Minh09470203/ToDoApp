@@ -1,22 +1,43 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ModelButton extends StatelessWidget {
+class ModelButton extends StatefulWidget {
 
   ModelButton({
-    super.key, required this.addTask,
+    super.key, required this.addTask, this.isDarkMode = false
   });
-  String textValue = '';
-
   final Function addTask;
+  bool isDarkMode;
+  @override
+  State<ModelButton> createState() => _ModelButtonState();
+}
+
+class _ModelButtonState extends State<ModelButton> {
+  String textValue = '';
+  DateTime? _selectedDate;
+
   void _handleOnclick(BuildContext context) {
     final name = textValue;
     if (name.isEmpty) {
       return;
     }
-    addTask(name);
+    widget.addTask(name, _selectedDate);
 
     Navigator.pop(context);
+  }
+
+  void _presentDatePicker(BuildContext context) {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+    ).then((pickedDate) {
+      if (pickedDate == null) return;
+      setState(() {
+        _selectedDate = pickedDate;
+      });
+    });
   }
 
   @override
@@ -27,11 +48,11 @@ class ModelButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 24, vertical: 40),
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: widget.isDarkMode ? Color(0xFF1E1E1E) : Colors.white,
             borderRadius: BorderRadius.circular(20),
             boxShadow: [
               BoxShadow(
-                color: Colors.lightBlueAccent.withOpacity(0.08),
+                color: Colors.lightBlueAccent.withOpacity(0.05),
                 blurRadius: 18,
                 offset: Offset(0, 8),
               ),
@@ -67,6 +88,27 @@ class ModelButton extends StatelessWidget {
                 style: TextStyle(fontSize: 18, color: Color(0xFF4B4B4B)),
               ),
               SizedBox(height: 18),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Enter Deadline',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.lightBlueAccent,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => _presentDatePicker(context),
+                    icon: Icon(Icons.calendar_today_rounded),
+                    iconSize: 30,
+                    color: _selectedDate != null ? Colors.blue : Colors.grey, // Xanh nếu đã chọn
+                  ),
+                ],
+              ),
+              SizedBox(height: 18,),
               ElevatedButton(
                 onPressed: () => _handleOnclick(context),
                 child: Text(

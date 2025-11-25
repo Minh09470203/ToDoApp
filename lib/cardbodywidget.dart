@@ -1,20 +1,18 @@
-import 'package:confirm_dialog/confirm_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CardBody extends StatelessWidget {
   CardBody({
-    super.key, required this.item, required this.onDelete,
+    super.key, required this.item, required this.onDelete, required this.onEdit, required this.onCheck
   });
   var item;
   final Function onDelete;
-  void _handleOntap() {
-    onDelete(item.id); // Call the onDelete function with the item's id
-  }
+  final Function onEdit;
+  final Function onCheck;
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 20, left: 10, right: 10),
+      margin: EdgeInsets.only(bottom: 20, left: 5, right: 5),
       width: double.infinity,
       height: 80,
       decoration: BoxDecoration(
@@ -29,63 +27,60 @@ class CardBody extends StatelessWidget {
           ),
         ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 8),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 8),
+                  Text(
+                    item.name,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  child: Icon(Icons.check_circle_outline, color: Colors.lightBlueAccent, size: 30),
-                ),
-                SizedBox(width: 16),
-                Text(
-                  item.name, // Replace with dynamic task name
-                  style: TextStyle(
-                    fontSize: 22,
-                    color: Color(0xFF4B4B4B),
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: 0.5,
-                  ),
-                ),
-              ],
-            ),
-            Material(
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(12),
-                onTap: () async {
-                  if (await confirm(context)) {
-                    _handleOntap();
-                  }
-                  return;
-                },
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(12),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.10),
-                        blurRadius: 4,
-                        offset: Offset(0, 2),
+                  SizedBox(height: 8),
+                  if (item.deadline != null)
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: Row(
+                        children: [
+                          Icon(Icons.calendar_today, size: 12, color: Colors.grey),
+                          SizedBox(width: 5),
+                          Text(
+                            // Format ngày đơn giản: DD/MM/YYYY
+                            "${item.deadline!.day}/${item.deadline!.month}/${item.deadline!.year}",
+                            style: TextStyle(
+                              fontSize: 14,
+                              // Nếu quá hạn (trước ngày hôm nay) thì hiện màu Đỏ, còn lại màu Xám
+                              color: item.deadline!.isBefore(DateTime.now().subtract(Duration(days: 1)))
+                                  ? Colors.red
+                                  : Colors.grey[600],
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: Icon(Icons.delete_outline, color: Colors.redAccent, size: 28),
-                ),
+                    ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+          IconButton(
+            icon: Icon(Icons.edit, color: Colors.blue),
+            onPressed: () => onEdit(item),
+          ),
+          IconButton(
+            icon: Icon(Icons.delete, color: Colors.red),
+            onPressed: () => onDelete(item),
+          ),
+          IconButton(
+              icon: Icon(Icons.check, color: item.isCompleted ? Colors.green : Colors.grey),
+              onPressed: () => onCheck(item)
+          )
+        ],
       ),
     );
   }

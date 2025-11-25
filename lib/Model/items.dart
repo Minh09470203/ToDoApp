@@ -1,7 +1,13 @@
 class DataItems {
   final String id;
-  final String name;
+  String name;
+  bool isCompleted;
+  DateTime? deadline;
 
-  DataItems({required this.id, required this.name});
-
+  DataItems({
+    required this.id,
+    required this.name,
+    this.isCompleted = false,
+    this.deadline,
+  });
 }
