@@ -1,30 +1,44 @@
-# ToDoList Flutter App
+# ToDoList - Flutter App
 
-A simple and beautiful ToDoList application built with Flutter. You can add, view, and delete tasks with confirmation dialogs.
+A simple ToDoList app built with Flutter that lets you add, edit, delete, and mark tasks as completed. Data is stored locally using `shared_preferences`. The UI supports light/dark themes and shows task details in a modal bottom sheet.
 
-## Features
+## Main features
+- Add tasks with a name and an optional deadline.
+- Edit task names.
+- Delete tasks (with confirmation).
+- Mark/unmark tasks as completed.
+- Swipe-to-delete (Dismissible) with confirmation.
+- View task details in a modal bottom sheet.
+- Light/Dark theme toggle.
+- Simple local storage with `shared_preferences`.
 
-- Add new tasks
-- View all tasks in a styled list
-- Delete tasks with confirmation dialog
-- Responsive and modern UI
+## Requirements
+- Flutter (stable channel) installed.
+- Dart (comes with Flutter).
+- An emulator or a physical device to run the app.
 
-## Installation
+## Packages used
+- shared_preferences
+- google_fonts
+- (and Flutter's built-in packages)
 
-1. **Clone the repository:**
-2. **Install dependencies:**
+Make sure to add these packages to the `dependencies` section of `pubspec.yaml` if they are not already present.
 
-## Running the App
-**On Android/iOS emulator or device:**
+## Install & run
+1. Clone or download the repository:
+   - git clone <repo-url>
 
-## Usage
+2. Change to the project directory:
+   - cd <project-folder>
 
-1. Tap the **"+"** button to add a new task.
-2. Enter the task name and press **"Add Task"**.
-3. Your tasks will appear in the list.
-4. To delete a task, tap the **delete icon**. A confirmation dialog will appear. Choose **OK** to delete or **Cancel** to keep the task.
+3. Get dependencies:
+   - flutter pub get
 
-## Dependencies
+4. Run the app:
+   - flutter run
 
-- [Flutter](https://flutter.dev/)
-- [confirm_dialog](https://pub.dev/packages/confirm_dialog)
+Or build an APK:
+   - flutter build apk --release
+
+## License
+- MIT license
